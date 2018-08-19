@@ -37,9 +37,13 @@ conan_basic_setup()''')
 
     def package(self):
         self.copy("*.h", dst="include", src="RakNet/Source")
-        self.copy("*raknet*.lib", dst="lib", keep_path=False)
+        self.copy("*RakNetLibStatic.lib", dst="lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["RakNetLibStatic", "pthread"]
+        if self.settings.os == "Linux":
+            self.cpp_info.libs = ["RakNetLibStatic", "pthread"]
+        elif self.settings.compiler == "Visual Studio":
+            self.cpp_info.libs = ["RakNetLibStatic","ws2_32"]
+        
 
