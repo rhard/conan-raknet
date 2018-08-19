@@ -37,7 +37,7 @@ conan_basic_setup()''')
 
     def package(self):
         self.copy("*.h", dst="include", src="RakNet/Source")
-        self.copy("*RakNetLibStatic.lib", dst="lib", keep_path=False)
+        self.copy("*.lib", dst="lib", src="Lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
 
     def package_info(self):
