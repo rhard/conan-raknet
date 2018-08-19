@@ -45,5 +45,5 @@ conan_basic_setup()''')
             self.cpp_info.libs = ["RakNetLibStatic", "pthread"]
         elif self.settings.compiler == "Visual Studio":
             self.cpp_info.libs = ["RakNetLibStatic","ws2_32"]
-        
-
+        elif self.settings.os == "Macos":
+            self.cpp_info.libs = ["RakNetLibStatic"]
