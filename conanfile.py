@@ -1,4 +1,5 @@
 from conans import ConanFile, CMake, tools
+import os
 
 
 class RaknetConan(ConanFile):
@@ -39,6 +40,11 @@ conan_basic_setup()''')
         self.copy("*.h", dst="include", src="RakNet/Source")
         self.copy("*.lib", dst="lib", src="Lib", keep_path=False)
         self.copy("*.a", dst="lib", keep_path=False)
+        if self.settings.compiler == "Visual Studio":
+            lib_path = os.path.join(self.package_folder, "lib")
+            current_lib = os.path.join(lib_path, "RakNetLibStaticd.lib")
+            if os.path.isfile(current_lib):
+                os.rename(current_lib, os.path.join(lib_path, "RakNetLibStatic.lib"))
 
     def package_info(self):
         if self.settings.os == "Linux":
